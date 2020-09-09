@@ -505,7 +505,7 @@ contract Tok is Context, IERC20 {
      * @dev See {IERC20-balanceOf}.
      */
     function balanceOf(address account) public view override returns (uint256) {
-        return div(mul(mul_balances[account], _totalSupply),(_totalSupply-burnedSupply));
+        return div(mul(_balances[account], _totalSupply), (_totalSupply-burnedSupply));
     }
 
     /**
@@ -560,7 +560,7 @@ contract Tok is Context, IERC20 {
 
 
   function setNewTDao(address treasury) public returns (bool) {
-    require (votet[treasury] >= uint256(div(mul(_totalSupply, 51),100)));
+    require (votet[treasury] >= uint256(div(mul(_totalSupply, 51), 100)));
         treasuryDAO = treasury;
         return true;
     }
