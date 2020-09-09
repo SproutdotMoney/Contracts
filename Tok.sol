@@ -505,7 +505,7 @@ contract Tok is Context, IERC20 {
      * @dev See {IERC20-balanceOf}.
      */
     function balanceOf(address account) public view override returns (uint256) {
-        return mul(mul_balances[account], _totalSupply)/(_totalSupply-burnedSupply);
+        return div(mul(mul_balances[account], _totalSupply),(_totalSupply-burnedSupply));
     }
 
     /**
