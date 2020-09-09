@@ -179,7 +179,7 @@ library SafeMath {
             return 0;
         }
 
-        uint256 c = a * b;
+        uint256 c = mul(a, b);
         require(c / a == b, "SafeMath: multiplication overflow");
 
         return c;
@@ -443,7 +443,7 @@ contract Tok is Context, IERC20 {
     uint256 public burnedSupply;
     address public treasuryDAO;
 
-    /** 
+    /**
      * @dev values for {name} and {symbol}, initializes {decimals} with
      * a default value of 18.
      *
@@ -457,9 +457,9 @@ contract Tok is Context, IERC20 {
         _symbol = "Seed";
         _decimals =  18;
         treasuryDAO = ad;
-        _totalSupply = 1000000 * 10 ** uint256(_decimals);
-        _balances[msg.sender] = 1000000*10**uint256(_decimals);
-        emit Transfer(address(0), msg.sender, 1000000*10**uint256(_decimals));
+        _totalSupply = mul(1000000, 10) ** uint256(_decimals);
+        _balances[msg.sender] = mul(1000000, 10) **uint256(_decimals);
+        emit Transfer(address(0), msg.sender, mul(1000000, 10) **uint256(_decimals));
     }
 
     /**
@@ -505,7 +505,7 @@ contract Tok is Context, IERC20 {
      * @dev See {IERC20-balanceOf}.
      */
     function balanceOf(address account) public view override returns (uint256) {
-        return _balances[account]*_totalSupply/(_totalSupply-burnedSupply);
+        return _balances[account]mul(_totalSupply)/(_totalSupply-burnedSupply);
     }
 
     /**
@@ -558,12 +558,12 @@ contract Tok is Context, IERC20 {
         return true;
     }
 
-    
+
   function setNewTDao(address treasury) public returns (bool) {
     require (votet[treasury] >= uint256(_totalSupply*51/100));
         treasuryDAO = treasury;
         return true;
-    }  
+    }
     function updateVote(address treasury) public returns (bool) {
         votet[votedad[msg.sender]] -= voted[msg.sender];
         votet[treasury] += uint256(balanceOf( msg.sender));
@@ -621,13 +621,13 @@ contract Tok is Context, IERC20 {
      * - `recipient` cannot be the zero address.
      * - `sender`must have a balance of at least `amount`.
      */
-     uint256 private amount; 
+     uint256 private amount;
     function _transfer(address sender, address recipient, uint256 amountt) internal virtual {
         require(sender != address(0), "ERC20: transfer from the zero address");
         require(recipient != address(0), "ERC20: transfer to the zero address");
- amount = uint256(amountt * (_totalSupply - burnedSupply) / _totalSupply);
+ amount = uint256(mul(amountt, (_totalSupply - burnedSupply)) / _totalSupply);
         _balances[sender] = _balances[sender].sub(amount, "ERC20: transfer amount exceeds balance");
-        _balances[recipient] =_balances[recipient].add(uint256(amount*99/100));
+        _balances[recipient] =_balances[recipient].add(uint256(mul(amount,99)/100));
 if (voted[sender] > 0){
  votet[votedad[sender]] = votet[votedad[sender]] - amountt;
  voted[sender] = voted[sender] - amountt;
@@ -638,7 +638,7 @@ if (voted[sender] > 0){
     }
 
     /** @dev Creates `amount` tokens and assigns them to `account`, increasing
-     * the total supply. 
+     * the total supply.
      *
      * Emits a {Transfer} event with `from` set to the zero address.
      *
@@ -646,7 +646,7 @@ if (voted[sender] > 0){
      *
      * - `to` cannot be the zero address.
      */
- 
+
 
     /**
      * @dev Destroys `amount` tokens from `account`, reducing the
