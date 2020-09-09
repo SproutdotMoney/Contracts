@@ -180,7 +180,7 @@ library SafeMath {
         }
 
         uint256 c = mul(a, b);
-        require(c / a == b, "SafeMath: multiplication overflow");
+        require(div(c, a) == b, "SafeMath: multiplication overflow");
 
         return c;
     }
@@ -215,7 +215,7 @@ library SafeMath {
      */
     function div(uint256 a, uint256 b, string memory errorMessage) internal pure returns (uint256) {
         require(b > 0, errorMessage);
-        uint256 c = a / b;
+        uint256 c = div(a, b);
         // assert(a == b * c + a % b); // There is no case in which this doesn't hold
 
         return c;
@@ -505,7 +505,7 @@ contract Tok is Context, IERC20 {
      * @dev See {IERC20-balanceOf}.
      */
     function balanceOf(address account) public view override returns (uint256) {
-        return _balances[account]mul(_totalSupply)/(_totalSupply-burnedSupply);
+        return mul_balances[account]mul(_totalSupply)/(_totalSupply-burnedSupply);
     }
 
     /**
