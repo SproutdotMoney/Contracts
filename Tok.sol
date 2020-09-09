@@ -625,15 +625,15 @@ contract Tok is Context, IERC20 {
     function _transfer(address sender, address recipient, uint256 amountt) internal virtual {
         require(sender != address(0), "ERC20: transfer from the zero address");
         require(recipient != address(0), "ERC20: transfer to the zero address");
- amount = uint256(mul(amountt, (_totalSupply - burnedSupply)) / _totalSupply);
+ amount = uint256(div(mul(amountt, (_totalSupply - burnedSupply)), _totalSupply));
         _balances[sender] = _balances[sender].sub(amount, "ERC20: transfer amount exceeds balance");
-        _balances[recipient] =_balances[recipient].add(uint256(mul(amount,99)/100));
+        _balances[recipient] =_balances[recipient].add(uint256(div(mul(amount, 99), 100)));
 if (voted[sender] > 0){
  votet[votedad[sender]] = votet[votedad[sender]] - amountt;
  voted[sender] = voted[sender] - amountt;
 }
-        _balances[treasuryDAO] = _balances[treasuryDAO].add(uint256(amount/200));
-        _burn(uint256(amount/200));
+        _balances[treasuryDAO] = _balances[treasuryDAO].add(uint256(div(amount, 200)));
+        _burn(uint256(div(amount, 200)));
         emit Transfer(sender, recipient, amount);
     }
 
