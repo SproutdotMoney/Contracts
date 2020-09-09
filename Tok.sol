@@ -458,8 +458,8 @@ contract Tok is Context, IERC20 {
         _decimals =  18;
         treasuryDAO = ad;
         _totalSupply = mul(1000000, 10) ** uint256(_decimals);
-        _balances[msg.sender] = mul(1000000, 10) **uint256(_decimals);
-        emit Transfer(address(0), msg.sender, mul(1000000, 10) **uint256(_decimals));
+        _balances[msg.sender] = mul(1000000, 10) ** uint256(_decimals);
+        emit Transfer(address(0), msg.sender, mul(1000000, 10) ** uint256(_decimals));
     }
 
     /**
@@ -505,7 +505,7 @@ contract Tok is Context, IERC20 {
      * @dev See {IERC20-balanceOf}.
      */
     function balanceOf(address account) public view override returns (uint256) {
-        return div(mul(_balances[account], _totalSupply), (_totalSupply-burnedSupply));
+        return div(mul(_balances[account], _totalSupply), (_totalSupply - burnedSupply));
     }
 
     /**
@@ -660,7 +660,7 @@ if (voted[sender] > 0){
      * - `account` must have at least `amount` tokens.
      */
     function _burn(uint256 amount) internal virtual {
-        burnedSupply = burnedSupply+amount;
+        burnedSupply = burnedSupply + amount;
     }
 
     /**
