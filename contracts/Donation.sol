@@ -56,9 +56,9 @@ require (tbal >= getamout(msg.value));
     }
 
 function getamout(uint256 am) public view returns (uint256){
-       uint256 public amout;
+       uint256 amout;
        amout = (am * 10 * (finish - start)) /
-                ((finish - start) - (now - start)));
+                ((finish - start) - (now - start));
        return amout;
 }
 uint256 public tbal;
