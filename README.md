@@ -8,7 +8,7 @@
 ## Drip Pools
 [TreasuryDrip](https://etherscan.io/address/0x57BF1aaC7ab4265D52bF7DdeBbf40183B76727A4#code)
 
-[UniPool Drip](https://etherscan.io/address/0xE9145aE130D9595B9f97649CbDA718B46B1531a7#code)
+[UniPool Drip](https://etherscan.io/address/0xEBfb83C1AFCb770D2C7f66C2f00dfF302208232B#code)
 
 [FounderPool](https://etherscan.io/address/0x7918c977B391b5Cbd38B48c02045802009c712C3#code)
 
